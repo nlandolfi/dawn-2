@@ -19,7 +19,7 @@ Dependencies
 A task has and belongs to many dependencies. As such a task can be dependended upon by several other tasks and several other tasks can depend upon it.
 
 ### Task#add_dependency(Dawn::Task task)
-    * Adds the task to this task's dependencies
+    * Adds the task to this task's dependencies, if it isn't already a dependency.
 
 ### Task#remove_dependency(Dawn::Task task)
     * Removes the task from this task's dependendencies
@@ -46,6 +46,12 @@ A task has many children, and belongs to a parent.
 
 ### Task#parent? || Task#is_parent? || Task#parent?
     * Boolean of whether this task has any children
+
+### Task#add_child(Dawn::Task task)
+    * Adds child if it isn't already a child
+
+### Task#remove_child(Dawn::Task task)
+    * Removes child, returns children.
 
 
 

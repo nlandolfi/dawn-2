@@ -107,7 +107,7 @@ describe Dawn::Task do
       end
 
       after(:all) do
-        @result = @task.add_dependency(@dependency)
+        @task.add_dependency(@dependency)
       end
 
     end
@@ -131,7 +131,7 @@ describe Dawn::Task do
     end
 
     describe "Task#no_dependencies? || Task#has_no_dependencies()" do
-      it "has_no_dependencies has teh same value as no_dependencies?" do
+      it "has_no_dependencies has the same value as no_dependencies?" do
         expect(@task.no_dependencies?).to eq(@task.has_no_dependencies?)
       end
 
@@ -148,6 +148,48 @@ describe Dawn::Task do
         @task.dependencies = []
         expect(@task.no_dependencies?).to eq(true)
       end
+    end
+
+  end
+
+  # --- }}}
+
+  # --- Tree Nature {{{
+
+  describe "tree nature" do
+    before(:all) do
+      @parent = Dawn::Task.new(name: "Parent")
+      @child1 = Dawn::Task.new(name: "Child 1")
+      @child2 = Dawn::Task.new(name: "Child 2")
+      @grand_child = Dawn::Task.new(name: "Grandchild")
+
+      @parent.add_child(@child1)
+      @parent.add_child(@child2)
+      @child1.add_child(@grand_child)
+
+      @tasks = [@parent, @child1, @child2, @grand_child]
+
+    end
+
+    it "supports children" do
+      @tasks.each do |task|
+        expect(task).to_not be(nil)
+      end
+
+      expect(@parent.children).to be_kind_of(ActiveRecord::Associations::CollectionProxy)
+      expect(@child1.children).to be_kind_of(ActiveRecord::Associations::CollectionProxy)
+
+      expect(@parent.children.first).to eq(@child1)
+      expect(@parent.children.last).to eq(@child2)
+
+      expect(@child1.children.first).to eq(@grand_child)
+
+      expect(@parent.children.first.children.first).to eq(@grand_child)
+    end
+
+
+    after(:all) do
+      @tasks.each {|t| t.destroy}
     end
 
   end

@@ -21,7 +21,11 @@ module Dawn
              association_foreign_key: :dependent_id
 
     def add_dependency(task)
-      dependencies << task
+      if dependencies.to_a.include? task
+        return dependencies
+      else
+        return dependencies << task
+      end
     end
 
     def remove_dependency(task)
@@ -67,6 +71,19 @@ module Dawn
 
     alias_method :is_parent?, :parent?
     alias_method :children?, :parent?
+
+    def add_child(task)
+      if children.to_a.include? task
+        return children
+      else
+        return children << task
+      end
+    end
+
+    def remove_child(task)
+      children.delete(task)
+      return children
+    end
 
     # --- }}}
 
