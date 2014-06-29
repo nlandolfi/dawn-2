@@ -27,7 +27,7 @@ A task has and belongs to many dependencies. As such a task can be dependended u
 ### Task#dependencies?() || Task#has_dependencies?
     * Returns a boolean whether this task has dependencies.
 
-### Task#no_dependencies?()
+### Task#no_dependencies?() ||Task#has_no_dependencies?()
     * Boolean whether this task has no dependencies.
 
 Tree Nature

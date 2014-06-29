@@ -18,6 +18,7 @@ end if ENV["COVERAGE"]
 RSpec.configure do |config|
 
   config.color = true
+  config.fail_fast = ENV["FAIL_FAST"] || true
 
 end
 

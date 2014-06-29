@@ -6,7 +6,6 @@ module Dawn
 
     belongs_to :queue
 
-
     def key
       self.name.downcase.to_sym
     end
@@ -27,14 +26,18 @@ module Dawn
 
     def remove_dependency(task)
       dependencies.delete(task)
+      return dependencies
     end
 
-    def dependencies?
+    def no_dependencies?
       dependencies.empty?
     end
 
+    alias_method :has_no_dependencies?, :no_dependencies?
+
+    def dependencies?; !no_dependencies?; end
+
     alias_method :has_dependencies?, :dependencies?
-    def no_dependencies?; !dependencies?; end
 
     # --- }}}
 
