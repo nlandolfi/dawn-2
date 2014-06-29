@@ -46,10 +46,6 @@ module Dawn
 
     # --- }}}
 
-    def next
-
-    end
-
   end
 end
 
