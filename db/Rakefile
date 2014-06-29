@@ -1,0 +1,9 @@
+require "yaml"
+require "logger"
+require "active_record"
+
+namespace :db do
+  def create_database config
+
+    create_db = lambda do |config|
+      ActiveRecord::Base.establish_connection config
