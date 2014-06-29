@@ -80,6 +80,7 @@ describe Dawn::Task do
 
       after(:all) do
         @task.remove_dependency(@dependency_two)
+        @dependency_two.destroy
       end
     end
 
