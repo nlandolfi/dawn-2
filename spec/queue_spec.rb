@@ -5,9 +5,10 @@ end
 
 require_relative "./spec_helper"
 
-describe Dawn::Task do
+
+describe Dawn::Queue do
   it "creates" do
-    expect(Dawn::Task.create).to_not eq(nil)
+    expect(Dawn::Queue.create).to_not eq(nil)
   end
 end
 
