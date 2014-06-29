@@ -2,11 +2,16 @@
 module Dawn
   class Task < ActiveRecord::Base
 
+    # --- Core {{{
+
     belongs_to :queue
+
 
     def key
       self.name.downcase.to_sym
     end
+
+    # --- }}}
 
     # --- Dependencies {{{
 
