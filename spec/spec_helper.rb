@@ -1,11 +1,11 @@
 
 ENV["RACK_ENV"] = "test"
 
+require_relative "../dawn.rb"
+
 Bundler.require(:test)
 
 Coveralls.wear!
-
-require_relative "../dawn.rb"
 
 SimpleCov.coverage_dir ENV["COVERAGE_PATH"] || "/tmp/coverage"
 
