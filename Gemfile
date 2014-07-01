@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 # Support
+gem "rake"
 gem "activesupport", require: "active_support"
 
 # Persistence

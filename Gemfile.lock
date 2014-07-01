@@ -22,6 +22,7 @@ GEM
     json (1.8.1)
     minitest (5.3.5)
     multi_json (1.10.1)
+    rake (10.1.0)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -50,6 +51,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activesupport
+  rake
   rspec
   simplecov
   sqlite3
