@@ -5,7 +5,7 @@ require_relative "../dawn.rb"
 
 Bundler.require(:test)
 
-Coveralls.wear!
+Coveralls.wear! if ENV["TRAVIS"]
 
 SimpleCov.coverage_dir ENV["COVERAGE_PATH"] || "/tmp/coverage"
 
