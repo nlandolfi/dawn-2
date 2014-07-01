@@ -26,7 +26,7 @@ module Dawn
              association_foreign_key: :dependent_id
 
     def add_dependency(task)
-      dependencies << task unless dependencies.to_a.include? task
+      dependencies << task unless dependence(task)
 
       self
     end
@@ -46,6 +46,15 @@ module Dawn
     def dependencies?; !no_dependencies?; end
 
     alias_method :has_dependencies?, :dependencies?
+
+    def has_dependency(task)
+      dependencies.to_a.include? task
+    end
+
+    def dependence(task)
+      self.has_dependency(task) or task.has_dependency(self)
+    end
+
 
     # --- }}}
 
