@@ -111,6 +111,23 @@ module Dawn
       set_current_queued_task(queued_task_for_task(task)) if has(task)
     end
 
+    def complete_current_task; complete(current_queued_task); end
+
+    # --- }}}
+
+    # --- Status {{{
+
+    def complete?; incomplete_queued_tasks.empty?; end
+    alias_method :finished?, :complete?
+
+    def started?; current_queued_task.nil? and complete_queued_tasks.empty?; end
+
+    # --- }}}
+
+    # --- Selection {{{
+
+    def sample; incomplete_tasks.sample; end
+
     # --- }}}
 
   end
