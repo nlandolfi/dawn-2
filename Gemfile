@@ -11,4 +11,5 @@ gem "sqlite3"
 group :test do
   gem "rspec"
   gem "simplecov"
+  gem "coveralls"
 end
