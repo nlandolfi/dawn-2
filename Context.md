@@ -1,2 +1,5 @@
-just did: tested task except for tree structure
-next: sinatra app? db migrations?
+just did: setup travis and coveralls
+
+next: queued tasks
+
+long term: sinatra app? db migrations?
