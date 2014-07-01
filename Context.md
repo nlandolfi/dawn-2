@@ -1,5 +1,5 @@
-just did: setup travis and coveralls
+just did: queued tasks, competions, current
 
-next: queued tasks
+next: task state? tell don't ask
 
 long term: sinatra app? db migrations?
