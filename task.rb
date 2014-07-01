@@ -13,6 +13,7 @@ module Dawn
     # --- Queues {{{
 
     has_many :queued_tasks
+    has_many :queues, through: :queued_tasks
 
     # --- }}}
 
