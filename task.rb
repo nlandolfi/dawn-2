@@ -26,16 +26,15 @@ module Dawn
              association_foreign_key: :dependent_id
 
     def add_dependency(task)
-      if dependencies.to_a.include? task
-        return dependencies
-      else
-        return dependencies << task
-      end
+      dependencies << task unless dependencies.to_a.include? task
+
+      self
     end
 
     def remove_dependency(task)
       dependencies.delete(task)
-      return dependencies
+
+      self
     end
 
     def no_dependencies?
@@ -78,16 +77,15 @@ module Dawn
     alias_method :children?, :parent?
 
     def add_child(task)
-      if children.to_a.include? task
-        return children
-      else
-        return children << task
-      end
+      children << task unless children.to_a.include? task
+
+      self
     end
 
     def remove_child(task)
       children.delete(task)
-      return children
+
+      self
     end
 
     # --- }}}

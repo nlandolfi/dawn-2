@@ -74,8 +74,8 @@ describe Dawn::Task do
         expect(@task.dependencies.last).to eq(@dependency_two)
       end
 
-      it "returns the dependencies" do
-        expect(@task.dependencies).to eq(@result)
+      it "returns itself" do
+        expect(@task).to eq(@result)
       end
 
       after(:all) do
@@ -97,13 +97,13 @@ describe Dawn::Task do
         expect(@task.dependencies.size).to eq(0)
       end
 
-      it "returns the dependencies" do
-        expect(@task.dependencies).to eq(@result)
+      it "returns itself" do
+        expect(@task).to eq(@result)
       end
 
       it "doesn't choke on removal of a task that is not a dependency" do
         @result = @task.remove_dependency(@dependency)
-        expect(@task.dependencies).to eq(@result)
+        expect(@task).to eq(@result)
       end
 
       after(:all) do
