@@ -14,7 +14,7 @@ module Dawn
     end
 
     def has(task)
-      tasks.include? task
+      tasks().include? task
     end
 
     alias_method :has_task, :has
@@ -42,6 +42,8 @@ module Dawn
       else
         incomplete_tasks.delete(task)
       end
+
+      return tasks()
     end
 
     # --- }}}
