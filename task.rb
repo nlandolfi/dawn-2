@@ -4,11 +4,15 @@ module Dawn
 
     # --- Core {{{
 
-    belongs_to :queue
-
     def key
       self.name.downcase.to_sym
     end
+
+    # --- }}}
+
+    # --- Queues {{{
+
+    has_many :queued_tasks
 
     # --- }}}
 

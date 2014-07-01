@@ -1,20 +1,23 @@
+require_relative "queued_task"
 
 module Dawn
   class Queue < ActiveRecord::Base
 
     # --- Tasks {{{
 
-    has_many :complete_tasks
-    has_many :incomplete_tasks
-    belongs_to  :current_task, foreign_key: :current_task_id, class: "Task"
-    belongs_to  :previous_task, foreign_key: :previous_task_id, class: "Task"
+    has_many :queued_tasks
+    has_many :tasks, through: :queued_tasks
 
-    def tasks
-      incomplete_tasks.concat(complete_tasks)
+    def incomplete_tasks
+      queued_tasks.select { |task| task.incomplete? }.map { |queued_task| queued_task.task }
+    end
+
+    def complete_tasks
+      queued_tasks.select { |task| task.complete? }.map { |queued_task| queued_task.task }
     end
 
     def has(task)
-      tasks().include? task
+      tasks.include? task
     end
 
     alias_method :has_task, :has
@@ -31,19 +34,16 @@ module Dawn
     end
 
     def add_task(task)
-      incomplete_tasks << task unless has(task)
+      queued_tasks << Dawn::QueuedTask.create( queue: self, task: task )
     end
 
     def remove_task(task)
       return unless has(task)
 
-      if complete?(task)
-        complete_tasks.delete(task)
-      else
-        incomplete_tasks.delete(task)
+      queued_tasks.select { |queued_task| queued_task.task == task } .each do |queued_task|
+        queued_tasks.delete(queued_task)
+        queued_task.destroy
       end
-
-      return tasks()
     end
 
     # --- }}}

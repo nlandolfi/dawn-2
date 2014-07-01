@@ -21,7 +21,6 @@ ActiveRecord::Schema.define do
     table.timestamps
 
     table.integer :parent_task_id, unique: true
-    table.integer :queue_id
   end
 
 
@@ -35,19 +34,25 @@ ActiveRecord::Schema.define do
 
   # --- }}}
 
+  # --- Queues {{{
+
   create_table :queued_tasks, force: $force_db do |table|
+    table.integer :task_id
+    table.integer :queue_id
+    table.boolean :complete, default: false
+    table.boolean :current, default: false
 
     table.timestamps
   end
 
-
   create_table :queues, force: $force_db do |table|
-    table.integer :current_task_id
-    table.integer :previous_task_id
   end
+
+  # --- }}}
 
 end
 
 
 require_relative "task.rb"
 require_relative "queue.rb"
+require_relative "queued_task.rb"
