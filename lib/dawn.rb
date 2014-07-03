@@ -62,11 +62,26 @@ ActiveRecord::Schema.define do
 
   # --- }}}
 
+  # --- Services {{{
+
+  create_table :services, force: $force_db do |table|
+
+    table.timestamps
+  end
+
+  create_table :servers, force: $force_db do |table|
+    table.integer :service_id
+    table.integer :meta_service_id
+
+    table.timestamps
+  end
+
+  create_table :meta_services, force: $force_db do |table|
+    table.timestamps
+  end
+
+  # --- }}}
+
 end
 
-
-require_relative "core/task.rb"
-require_relative "core/queue.rb"
-require_relative "core/queued_task.rb"
-require_relative "core/queued_queue.rb"
-require_relative "core/meta_queue.rb"
+Dir[File.expand_path("../core/*.rb", __FILE__)].sort.each { |file| require file }
