@@ -1,5 +1,5 @@
-just did: prevent circular dependencies and circular trees
+just did: added base service, meta service and server constructs
 
-next: task state?  metaqueue book queues don't let a queue have two of the same queued task
+next: main service (run loop)
 
-long term: sinatra app? db migrations?
+long term: *sinatra app*? db migrations?
