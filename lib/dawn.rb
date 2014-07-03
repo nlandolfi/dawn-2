@@ -46,6 +46,18 @@ ActiveRecord::Schema.define do
   end
 
   create_table :queues, force: $force_db do |table|
+    table.timestamps
+  end
+
+  create_table :queued_queues, force: $force_db do |table|
+    table.integer :queue_id
+    table.integer :meta_queue_id
+
+    table.timestamps
+  end
+
+  create_table :meta_queues, force: $force_db do |table|
+    table.timestamps
   end
 
   # --- }}}
@@ -56,3 +68,5 @@ end
 require_relative "core/task.rb"
 require_relative "core/queue.rb"
 require_relative "core/queued_task.rb"
+require_relative "core/queued_queue.rb"
+require_relative "core/meta_queue.rb"
