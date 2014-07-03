@@ -10,19 +10,25 @@ module Dawn
     has_many :tasks, through: :queued_tasks
 
     def add_task(task)
-      return unless task.is_a? Dawn::Task
+      return self unless task.is_a? Dawn::Task
+      return self if self.has(task)
+
       queued_tasks << Dawn::QueuedTask.create( queue: self, task: task )
+
+      self
     end
 
     alias_method :add, :add_task
 
     def remove_task(task)
-      return unless has(task)
+      return self unless has(task)
 
       queued_tasks.select { |queued_task| queued_task.task == task } .each do |queued_task|
         queued_tasks.delete(queued_task)
         queued_task.destroy
       end
+
+      self
     end
 
     alias_method :remove, :remove_task
