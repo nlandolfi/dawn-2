@@ -103,6 +103,8 @@ module Dawn
     alias_method :children?, :parent?
 
     def add_child(task)
+      return self if parents.include? task
+
       children << task unless children.to_a.include? task
       task.parent = self
 
