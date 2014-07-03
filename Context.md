@@ -1,5 +1,5 @@
-just did: queued tasks, competions, current
+just did: restructured directory
 
-next: task state? tell don't ask queuequeues book queues
+next: task state? tell don't ask task completion, metaqueue book queues
 
 long term: sinatra app? db migrations?
