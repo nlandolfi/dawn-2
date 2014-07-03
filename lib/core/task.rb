@@ -65,6 +65,16 @@ module Dawn
 
     def subtasks; children; end
 
+    def parents
+      if parent and parent.parent
+        [parent] + parent.parents
+      elsif parent
+        [parent]
+      else
+        []
+      end
+    end
+
     def root?
       parent.nil?
     end
@@ -87,12 +97,14 @@ module Dawn
 
     def add_child(task)
       children << task unless children.to_a.include? task
+      task.parent = self
 
       self
     end
 
     def remove_child(task)
       children.delete(task)
+      task.parent = nil
 
       self
     end
