@@ -1,7 +1,7 @@
 
 ENV["RACK_ENV"] = "test"
 
-require_relative "../dawn.rb"
+require_relative "../app.rb"
 
 Bundler.require(:test)
 

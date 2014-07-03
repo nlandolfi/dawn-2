@@ -53,6 +53,6 @@ ActiveRecord::Schema.define do
 end
 
 
-require_relative "task.rb"
-require_relative "queue.rb"
-require_relative "queued_task.rb"
+require_relative "core/task.rb"
+require_relative "core/queue.rb"
+require_relative "core/queued_task.rb"
