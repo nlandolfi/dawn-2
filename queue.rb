@@ -117,8 +117,7 @@ module Dawn
 
     # --- Status {{{
 
-    def complete?; incomplete_queued_tasks.empty?; end
-    alias_method :finished?, :complete?
+    def finished?; incomplete_queued_tasks.empty?; end
 
     def started?; current_queued_task.nil? and complete_queued_tasks.empty?; end
 
