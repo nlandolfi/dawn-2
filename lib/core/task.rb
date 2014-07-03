@@ -26,7 +26,7 @@ module Dawn
              association_foreign_key: :dependent_id
 
     def add_dependency(task)
-      dependencies << task unless dependence(task)
+      dependencies << task unless self.interdependence(task)
 
       self
     end
@@ -38,7 +38,7 @@ module Dawn
     end
 
     def no_dependencies?
-      dependencies.empty?
+      dependencies.empty? and posterity.empty?
     end
 
     alias_method :has_no_dependencies?, :no_dependencies?
@@ -48,13 +48,14 @@ module Dawn
     alias_method :has_dependencies?, :dependencies?
 
     def has_dependency(task)
-      dependencies.to_a.include? task
+      dependencies.to_a.include? task or self.posterity.include? task
     end
 
-    def dependence(task)
-      self.has_dependency(task) or task.has_dependency(self)
-    end
+    alias_method :dependence, :has_dependency
 
+    def interdependence(task)
+      self.dependence(task) or task.dependence(self)
+    end
 
     # --- }}}
 
@@ -73,6 +74,12 @@ module Dawn
       else
         []
       end
+    end
+
+    def posterity
+      posterity = children.to_a
+      children.each { |child| posterity.concat(child.posterity) }
+      posterity
     end
 
     def root?
