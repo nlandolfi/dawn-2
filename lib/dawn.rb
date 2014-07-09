@@ -82,6 +82,61 @@ ActiveRecord::Schema.define do
 
   # --- }}}
 
+  # --- Data {{{
+
+  create_table :data, force: $force_db do |table|
+    table.datetime :start_time
+    table.datetime :end_time
+    table.string :action
+    table.string :subject
+
+    table.integer :location_id
+    table.integer :service_id
+
+    table.timestamps
+  end
+
+  create_table :metadata, force: $force_db do |table|
+    table.string :key
+    table.string :value
+    table.integer :datum_id
+
+    table.timestamps
+  end
+
+  create_table :locations, force: $force_db do |table|
+    table.float :latitude
+    table.float :longitude
+    table.string :name
+
+    table.timestamps
+  end
+
+  # --- }}}
+
+  # --- Users {{{
+
+  create_table :users, force: $force_db do |table|
+    table.integer :profile_id
+  end
+
+  create_table :user_profiles, force: $force_db do |table|
+    table.string :first_name
+    table.string :last_name
+    table.string :email
+    table.string :password_digest
+
+    table.timestamps
+  end
+
+  create_table :sessions, force: $force_db do |table|
+    table.string :token, unique: true
+    table.string :type
+
+    table.timestamps
+  end
+
+  # --- }}}
 end
 
 Dir[File.expand_path("../core/*.rb", __FILE__)].sort.each { |file| require file }
